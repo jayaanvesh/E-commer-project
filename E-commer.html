@@ -1,0 +1,254 @@
+<html>
+    <head>
+        <title> E-commerce </title>
+        <link href="E-commer.css" rel="stylesheet">
+        <style>
+
+        </style>
+    </head>
+    <body>
+        <section>
+        <div id="data">
+            <form id="inputfields">
+                Product Id: <input id="pid" type="text" style="margin-left:62px"> <br> <br>
+                Product Name: <input id="pname" type="text" style="margin-left:39px"> <br> <br>
+                Product Price: <input id="pprice" type="text" style="margin-left:43px"> <br> <br>
+                Product Image: <input id="pimage" type="text" style="margin-left:35px"> <br> <br>
+                Product Description: <input id="pdescription" type="text"> <br> <br>
+                <input id="show" type="button" value="Submit" onclick=display()>
+            </form>
+        </div>
+        
+        <div id="pcardset">
+
+        </div>
+    </section>
+    </body>
+    <script>
+        var product_details=[];
+        function display(){
+            event.preventDefault();
+            // INPUT FIELDS
+            var input_form = document.getElementById("inputfields");
+            var cardset=document.getElementById("pcardset");
+            var id=document.getElementById("pid");
+            var name=document.getElementById("pname");
+            var price=document.getElementById("pprice");
+            var simage=document.getElementById("pimage");
+            var description=document.getElementById("pdescription");
+            // NEW SECTION
+            var productcard=document.createElement("div");
+            productcard.classList.add("cardstyle");
+            productcard.id="card"+Math.random();
+            cardset.appendChild(productcard);
+
+            // CLOSE BUTTON
+            var close=document.createElement("button");
+            close.classList.add("close");
+            var node = document.createTextNode("X");
+            close.appendChild(node);
+            close.style.display="none";
+            productcard.appendChild(close);
+            close.setAttribute("onclick","test()");
+            close.onclick= function test(e){
+                document.getElementById(e.target.parentNode.id).remove();
+            }
+
+            // INPUT FIELD VALUE
+            var anchor = document.createElement("a");
+            anchor.setAttribute("href","page2.html");
+            anchor.setAttribute("target","_blank");
+            
+            var productimage = document.createElement("img");
+            productimage.setAttribute("src",simage.value);
+            productimage.setAttribute("height","200px");
+            productimage.setAttribute("width","255px");
+            productimage.style.borderRadius="4.5px";
+            // productimage.classList.add("imgstyle");
+            productimage.addEventListener("click",click);
+            anchor.appendChild(productimage);
+            productimage.addEventListener("mouseover", mouseOver);
+            function mouseOver() {
+                close.style.display="block";
+            }
+            productimage.addEventListener("mouseout", mouseOut);
+            function mouseOut() {
+                close.style.display="none";
+            }
+            close.addEventListener("mouseover", mousever);
+            function mousever(){
+                close.style.display="block";
+            }
+
+            var productid = document.createElement("p");
+            productid.classList.add("details");
+            var node = document.createTextNode(id.value);
+            productid.appendChild(node);
+            productid.a=id.value;
+
+            var productname = document.createElement("p");
+            productname.classList.add("details");
+            var node = document.createTextNode(name.value);
+            productname.appendChild(node);
+            productname.a=name.value;
+           
+            var productprice = document.createElement("p");
+            productprice.classList.add("details");
+            var node = document.createTextNode("₹ " + price.value + "/-");
+            productprice.appendChild(node);
+            productprice.a=price.value;
+            
+            var productdescription = document.createElement("p");
+            productdescription.style.display="none";
+            var node = document.createTextNode(description.value);
+            productdescription.appendChild(node);
+            productdescription.a=description.value;
+
+            // Input Field values Position
+            productcard.appendChild(anchor);
+            productcard.appendChild(productid);
+            productcard.appendChild(productname);
+            productcard.appendChild(productprice);
+            productcard.appendChild(productdescription);
+
+            document.getElementById("inputfields").reset();
+            // font awesome stylesheet link
+            var fontawesomelink = document.createElement("link");
+            fontawesomelink.setAttribute("rel","stylesheet");
+            fontawesomelink.setAttribute("href","https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+            document.head.appendChild(fontawesomelink);
+
+            // likes code
+            var like_sec = document.createElement("span");
+            productcard.appendChild(like_sec);
+            
+            var likeicon = document.createElement("i");
+            likeicon.classList="fa fa-thumbs-up";
+            likeicon.style.marginLeft="60px";
+            likeicon.style.fontSize="25px";
+            likeicon.style.color="blue";
+            likeicon.style.cursor="pointer";
+            like_sec.appendChild(likeicon);
+
+            var likescount = document.createElement("span");
+            likescount.style.fontSize="20px";
+            likescount.style.marginRight="10px";
+            like_sec.appendChild(likescount);
+            var likes=0;
+
+            likeicon.setAttribute("onclick","like()");
+            likeicon.onclick = function like(l){
+                likes++;
+                l.currentTarget.parentNode.lastChild.innerHTML=likes;
+            }
+            
+            // dislikes code
+            var dislike_sec = document.createElement("span");
+            productcard.appendChild(dislike_sec);
+
+            var dislikeicon = document.createElement("i");
+            dislikeicon.classList="fa fa-thumbs-down";
+            dislikeicon.style.fontSize="25px";
+            dislikeicon.style.color="blue";
+            dislikeicon.style.cursor="pointer";
+            dislike_sec.appendChild(dislikeicon);
+
+            var dislikescount = document.createElement("span");
+            dislikescount.style.fontSize="20px";
+            dislikescount.style.marginRight="40px";
+            dislike_sec.appendChild(dislikescount);
+            var dislikes=0;
+            
+            dislikeicon.setAttribute("onclick","dislike()");
+            dislikeicon.onclick = function dislike(dl){
+                dislikes++;
+                dl.currentTarget.parentNode.lastChild.innerHTML=dislikes;
+            }
+
+            // editing button code
+            var edit = document.createElement("i");
+            edit.classList="fa fa-pencil-square";
+            edit.style.fontSize="25px";
+            edit.style.color="red";
+            edit.style.cursor="pointer";
+            edit.setAttribute("onclick","edit_manager()");
+            productcard.appendChild(edit);
+
+            var cardid = document.getElementById(productcard.id).id;
+
+            // localstorage code when we click on image(it replace the values)
+            function click(){
+            localStorage.setItem("images",product_data.product_image);
+            localStorage.setItem("name",product_data.product_name);
+            localStorage.setItem("price",product_data.product_price);
+            localStorage.setItem("description",product_data.product_description);
+            }
+
+            // localstorage code when we submit the card details(it stores every card)
+            var product_data = {
+                card_id: cardid,
+                product_id: productid.a,
+                product_image: productimage.src,
+                product_name: productname.a,
+                product_price: productprice.a,
+                product_description: productdescription.a,
+            };
+            
+            product_details.push(product_data);
+            localStorage.setItem("productdetails",JSON.stringify(product_details));
+            
+            var cardid_for_childnodes=document.getElementById(productcard.id);
+            var all_childnodes = cardid_for_childnodes.childNodes;
+            // console.log(all_childnodes);
+            var childs_of_anchor=anchor.childNodes;
+
+            edit.onclick = function edit_manager(){
+                var grab_data = JSON.parse(localStorage.getItem("productdetails"));
+                var req_obj = product_details.find(o => o.card_id === cardid);
+
+                document.getElementById("pid").value= req_obj.product_id;
+                document.getElementById("pname").value= req_obj.product_name;
+                document.getElementById("pprice").value= req_obj.product_price;
+                document.getElementById("pimage").value= req_obj.product_image;
+                document.getElementById("pdescription").value= req_obj.product_description;
+
+                // Save Button Code
+                var save = document.createElement("i");
+                save.classList="fa fa-floppy-o";
+                save.style.marginLeft="50px";
+                save.style.fontSize="25px";
+                save.style.color="brown";
+                save.style.cursor="pointer";
+                save.setAttribute("onclick","save_manager()");
+                save.id=cardid;
+                input_form.appendChild(save);
+
+                save.onclick = function save_manager(){
+                    var productid_for_fields = product_data.product_id=document.getElementById("pid").value;
+                    var productname_for_fields = product_data.product_name=document.getElementById("pname").value;
+                    var productprice_for_fields = product_data.product_price=document.getElementById("pprice").value;
+                    var productimage_for_fields = product_data.product_image=document.getElementById("pimage").value;
+                    var productdescription_for_fields = product_data.product_description=document.getElementById("pdescription").value;
+
+                    localStorage.setItem("productdetails",JSON.stringify(product_details));
+
+                    var required_obj = product_details.find(o => o.card_id === save.id);
+
+                    var replace_name = all_childnodes[3].textContent=required_obj.product_name;
+                    var replace_price = all_childnodes[4].textContent="₹ " + required_obj.product_price + "/-";
+                    var replace_description = all_childnodes[5].textContent=required_obj.product_description;
+                    var replace_image = childs_of_anchor[0].src=required_obj.product_image;
+
+                    document.getElementById(save.id).remove();
+                    document.getElementById("inputfields").reset();
+
+
+                }
+                
+
+            }
+        }
+           
+
+    </script>
+</html>

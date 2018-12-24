@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <title> Login Page</title>
+        <link href="home.css" rel="stylesheet">
+        <link href="login.css" rel="stylesheet">
+        <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+
+        <style>
+
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <img class="logo" src=logo.png align=left>
+            <h1>e-commerce</h1>
+            <h4> 7871527062 </h4>
+            <i class="fas fa-phone"></i>
+            
+            <ul>
+                <li> <a href="original.html"> Home </a> </li>
+                <li> <a href="registration.html"> Register </a> </li>
+                <li> <a href="login.html"> Login </a> </li>
+                <li> <a href="contact.html"> Contact Us </a> </li>
+            </ul>
+        </header>
+
+        <div class="content">
+            <h3> Why you should be with e-commerce ?</h4><br>
+            <p> e-commerce takes low percentage from sellers </p><br>
+            <p> e-commerce provides you unlimited and hassle free selling facilities </p><br>
+            <p> Manage your products anytime,anywhere </p><br>
+            <p> Advertise with us at free of cost. <i><span style="font-size:60%;">T&C Apply</span></i> </p><br>
+        </div>
+        <div id="content">
+            <center><img id="userimg" src="123.gif"></center>
+            <h3>Login Here</h3><br><br>
+            <i class="fas fa-user" id=input_p></i>
+            <input type="text" id="login" placeholder="login Id..."> <br>
+            <span id="msgusername"> </span> <br>
+            <i class="fas fa-key"></i>
+            <input type="text" id="password" placeholder="Password..."> <br>
+            <span id="msgpassword"></span> <br>
+            <center><i class="fas fa-sign-in-alt" id="submit" onclick="get()"></i></center>
+            <!-- <button id="validate" onclick="get()" >Login</button> -->
+        </div>
+
+        <footer>
+            <div class="seller" >
+                <h3> Seller </h3>
+                <a href="#">WholeSale</a><br>
+                <a href="#">Retail</a>
+            </div>
+            <div class="make_money">
+                <h3> MAKE MONEY WITH US</h3>
+                <a href="#"> Sell on e-commerce </a><br>
+                <a href="#"> Become an Affiliate </a><br>
+                <a href="#"> Advertise with us</a>
+            </div>
+            <div class="customer_support" >
+                    <h3> CUSTOMER SUPPORT </h3>
+                    <a href="#"> Contact Us </a><br>
+                    <a href="#"> Shipping and Order Tracking </a><br>
+                    <a href="#"> Replacement </a>
+            </div>
+            <div class="social" >
+                <input placeholder="E-mail Id..." class="input">
+                <button class="subscribe">Subscribe</button><br><br>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="far fa-share-square"></i></a>
+            </div>
+            <break></break>
+            <div class="copyrights">
+                    <a href="#"> Privacy Notice </a>
+                    <p> &copy 2018 e-commerce.com, All rights reserved </p>
+            </div>
+        </footer>
+    </body>
+
+    <script>
+        function get(){
+            var login = document.getElementById("login").value;
+            var lpassword = document.getElementById("password").value;
+            if (login.length>=8 && lpassword.length>=8)
+            {
+            var user=localStorage.getItem(login);
+            var db_details=JSON.parse(user);
+                if (db_details.Password==lpassword)       
+                    {
+                    window.open("E-commer.html","_blank");
+                    }
+                else {
+                    document.getElementById("msgpassword").innerHTML="Incorrect Password";
+                }
+            }
+            else{
+                if (login.length < 8) {
+                    document.getElementById("msgusername").innerHTML="Invalid Username";
+                }
+                if (lpassword.length < 8) {
+                document.getElementById("msgpassword").innerHTML="Invalid Password";
+                }
+            }
+        }
+    </script>
+</html>

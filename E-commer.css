@@ -1,0 +1,68 @@
+#show{
+    border: none;
+    outline: none;
+    padding: 5px;
+    width: 120px;
+    font-size: 20px;
+    margin-left: 120px;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    /* background-image: linear-gradient(to left, blue,rgb(212, 74, 212)); */
+    background-image: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+    background-size: 400%;
+    animation: animate 10s linear infinite;
+}
+@keyframes animate{
+    0%{
+        background-position: 0%;
+    }
+    100%{
+        background-position: 400%;
+    }
+}
+#show:hover{
+    animation-play-state: paused;
+    box-shadow: 5px 8px 15px 0px rgba(0,0,0,0.5);
+}
+#pid,#pprice,#pname,#pdescription,#pimage{
+    outline: none;
+    border-color: rgba(27, 26, 26, 0.397);
+    /* border-radius: 20px; */
+}
+.cardstyle{
+   display: inline-block;
+   /* float: left; */
+   margin: 10px;
+   max-width: 255px;
+   border-radius:4.5PX;
+   background-color: rgb(255, 255, 255);
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+   /* background-image: url("bg2.jpg");
+   background-size: 255px 380px;
+   background-repeat: no-repeat; */
+   transform:scale(1);
+   transition-duration: 0.5s;
+
+}
+.cardstyle:hover{
+transform:scale(1.05);
+transition-duration: 0.5s;
+}
+.close{
+   cursor: pointer;
+   border: none;
+   background-color: black;
+   color: aliceblue;
+   position: absolute;
+   margin-left: 233px;
+}
+.close:hover{
+   background-color:rgb(110, 107, 107);
+}
+.details{
+   font-family: Georgia, 'Times New Roman', Times, serif;
+   font-size: 17px;
+   margin-left: 50px;
+   padding: 0.5px;
+}

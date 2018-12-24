@@ -1,0 +1,16 @@
+section{
+    background: linear-gradient(90deg, #3f51b5, #00bcd4);
+    animation: bganime 20s linear infinite;
+}
+
+@keyframes bganime{
+    0%{
+        filter: hue-rotate(0deg);
+    }
+    50%{
+        filter: hue-rotate(360deg);
+    }
+    100%{
+        filter: hue-rotate(0deg);
+    }
+}

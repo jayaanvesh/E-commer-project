@@ -1,0 +1,138 @@
+<html>
+    <head>
+        <title>page2</title>
+
+        <style>
+            * {box-sizing: border-box;}
+            
+            .magnifingSection {
+              position: relative;
+            }
+            
+            .magnifingLens {
+              position: absolute;
+              border: 1px solid #d4d4d4;
+              /*set the size of the lens:*/
+              width: 50px;
+              height: 50px;
+            }
+            
+            .magnifingResult {
+              float: right;
+              margin-right: 300px;
+              border: 1px solid #d4d4d4;
+              /*set the size of the result div:*/
+              width: 300px;
+              height: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="magnifingSection">
+            <img src="" id="image" height="300px" width="300px">
+            <div id="magDisplay" class="magnifingResult"></div>
+        </div>
+        <p id="name"></p>
+        <p id="price"></p>
+        <p id="wholedescription"></p>
+    </body>
+    <script>
+        // Get the data from Localstorage
+        var imgsrc=localStorage.getItem("images");
+        var name=localStorage.getItem("name");
+        var price=localStorage.getItem("price");
+        var description=localStorage.getItem("description");
+
+        // Append the data in respective tags
+        var imagesrc = document.getElementById("image").src=imgsrc;
+        var pname = document.getElementById("name").innerHTML=name;
+        var pprice = document.getElementById("price").innerHTML="₹." + price + "/-";
+        var pdescription = document.getElementById("wholedescription").innerHTML=description;
+
+        // var magDiv = document.getElementById("magDisplay");
+        // magDiv.style.display="none";
+
+        // var image = document.getElementById("image");
+        // image.addEventListener("mouseover",mouseOver);
+        // function mouseOver(){
+        //   magDiv.style.display="block";
+        // }
+
+        // Zooming Image at a Particular Position
+        function magnifing(imgId, showId){
+            var img, lens, show, cx, cy;
+            img = document.getElementById(imgId);
+            show = document.getElementById(showId);
+
+            // Create Lens
+            lens = document.createElement("div");
+            lens.setAttribute("class","magnifingLens");
+            img.parentElement.insertBefore(lens, img);
+
+            // Calculate the ratio b/w magnifingResult and Lens
+            cx = show.offsetWidth / lens.offsetWidth;
+            cy = show.offsetHeight / lens.offsetHeight;
+
+            // Set the background properties for show
+            show.style.backgroundImage = "url('" +img.src+ "')";
+            show.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
+
+            // events, if someone moves the lens
+            lens.addEventListener("mousemove",lensMove);
+            img.addEventListener("mousemove",lensMove);
+
+            // event function
+            function lensMove(e){
+                var cursorPos, x, y;
+                e.preventDefault();
+
+                // Calculate the Cursor Position
+                cursorPos = getCursorPos(e);
+
+                // Calculate the Lens Position
+                lx = cursorPos.lx - (lens.offsetWidth/2);
+                ly = cursorPos.ly - (lens.offsetHeight/2);
+
+                // Prevent the Lens from being Outside the Image
+                if(lx > img.width - lens.offsetWidth){
+                    lx = img.width - lens.offsetWidth;
+                }
+                if(lx < 0){
+                    lx = 0;
+                }
+                
+                if(ly > img.height - lens.offsetHeight){
+                    ly = img.height - lens.offsetHeight;
+                }
+                if(ly < 0){
+                    ly = 0;
+                }
+
+                // Link those values to the Lens
+                lens.style.left = lx + "px";
+                lens.style.top = ly + "px";
+
+                // show what Lens Sees
+                show.style.backgroundPosition = "-" + (lx * cx) + "px -" + (ly * cy) + "px";
+            }
+            function getCursorPos(e) {
+                var imgPositions, lx = 0, ly = 0;
+                e = e || window.event;
+                
+                // get the x and y positions of the image
+                imgPositions = img.getBoundingClientRect();
+
+                // calculate the cursor's x and y coordinates, relative to the image
+                lx = e.pageX - imgPositions.left;
+                ly = e.pageY - imgPositions.top;
+
+                // consider any page scrolling
+                lx = lx - window.pageXOffset;
+                ly = ly - window.pageYOffset;
+                return {lx : lx, ly : ly};
+            }
+            
+        }
+        magnifing("image","magDisplay");
+    </script>
+</html>

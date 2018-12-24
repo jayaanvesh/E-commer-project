@@ -1,0 +1,58 @@
+#content{
+    position: absolute;
+    top: 35%;
+    left: 60%;
+    color: white;
+    padding: 20px;
+    width: 250px;
+    height: auto;
+    /* text-align: center; */
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0,0.45);
+    transform:scale(1);
+    transition-duration: 0.5s;
+    
+}
+#content:hover{
+    transform: scale(1.1);
+    transition-duration: 0.5s;
+}
+#content #userimg{
+    width: 40px;
+    height: 40px;
+}
+#content h3{
+    text-align: center;
+    color:chartreuse;
+}
+#content input{
+    border: none;
+    color: white;
+    border-bottom: 1px solid black;
+    background: transparent;
+    outline: none;
+    height: 30px;
+    width: 100%;
+    caret-color: red;
+}
+#content ::placeholder{
+    color: rgba(255, 255, 255,0.5);
+}
+#content #submit{
+    font-size: 40px;
+    padding: 10px;
+    padding-bottom:0px;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+#content #submit:hover{
+    background-image: linear-gradient(to left,yellow,violet);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+#content #msgusername, #msgpassword, #msgemail{
+    color: red;
+    font-size: 15px;
+    font-style: italic;
+}

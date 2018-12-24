@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <title> Registration Page</title>
+        <link href="home.css" rel="stylesheet">
+        <link href="register.css" rel="stylesheet">
+        <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    </head>
+
+    <body>
+        <header>
+            <img class="logo" src=logo.png align=left>
+            <h1>e-commerce</h1>
+            <h4> 7871527062 </h4>
+            <i class="fas fa-phone"></i>
+            
+            <ul>
+                <li> <a href="original.html"> Home </a> </li>
+                <li> <a href="registration.html"> Register </a> </li>
+                <li> <a href="login.html"> Login </a> </li>
+                <li> <a href="contact.html"> Contact Us </a> </li>
+            </ul>
+        </header>
+
+        <div class="content">
+            <h3> Why you should be with e-commerce ?</h4><br>
+            <p> e-commerce takes low percentage from sellers </p><br>
+            <p> e-commerce provides you unlimited and hassle free selling facilities </p><br>
+            <p> Manage your products anytime,anywhere </p><br>
+            <p> Advertise with us at free of cost. <i><span style="font-size:60%;">T&C Apply</span></i> </p><br>
+        </div>
+        <div id="content">
+            <center><img id="userimg" src="123.gif"></center>
+            <h3> Register Here </h3><br>
+            <i class="fas fa-user"></i>
+            <input type="text" id="username" placeholder="Username..."> <br>
+            <span id="msgusername"> </span> <br>
+            <i class="fas fa-envelope"></i>
+            <input type="text" id="email" placeholder="E-mail Id..."> <br>
+            <span id="msgemail"></span> <br>
+            <i class="fas fa-key"></i>
+            <input type="text" id="password" placeholder="Password..."> <br>
+            <span id="msgpassword_l"> </span>
+            <span id="msgpassword_uc"> </span>
+            <span id="msgpassword_lc"> </span>
+            <span id="msgpassword_n"> </span> <br>
+            <center><i class="fas fa-handshake" id="submit" onclick="save()"></i></center> <br><br>
+            <!-- <button id="submit" onclick="save()">Submit</button> <br><br> -->
+            <span id="msgregistration"> </span>
+        </div>
+            <!-- <button id="login_button">Login</button> -->
+
+        <footer>
+            <div class="seller" >
+                <h3> Seller </h3>
+                <a href="#">WholeSale</a><br>
+                <a href="#">Retail</a>
+            </div>
+            <div class="make_money">
+                <h3> MAKE MONEY WITH US</h3>
+                <a href="#"> Sell on e-commerce </a><br>
+                <a href="#"> Become an Affiliate </a><br>
+                <a href="#"> Advertise with us</a>
+            </div>
+            <div class="customer_support" >
+                    <h3> CUSTOMER SUPPORT </h3>
+                    <a href="#"> Contact Us </a><br>
+                    <a href="#"> Shipping and Order Tracking </a><br>
+                    <a href="#"> Replacement </a>
+            </div>
+            <div class="social" >
+                <input placeholder="E-mail Id..." class="input">
+                <button class="subscribe">Subscribe</button><br><br>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="far fa-share-square"></i></a>
+            </div>
+            <break></break>
+            <div class="copyrights">
+                    <a href="#"> Privacy Notice </a>
+                    <p> &copy 2018 e-commerce.com, All rights reserved </p>
+            </div>
+        </footer>
+    </body>
+
+    <script>
+        function save(){
+            var username = document.getElementById("username").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var patt_special = /@/.test(email);
+            var patt_uppercase =/[A-Z]/.test(password);
+            var patt_lowercase =/[a-z]/.test(password);
+            var patt_number =/[0-9]/.test(password);
+            if (username.length>=8 && password.length>=8 && patt_special==true && patt_uppercase==true && patt_lowercase==true && patt_number==true)
+                {
+                var data = {
+                Emailid : email,
+                Username : username,
+                Password : password,
+                };
+                localStorage.setItem(data.Emailid,JSON.stringify(data));
+                document.getElementById("msgregistration").style.display="block";
+                document.getElementById("msgregistration").innerHTML="Registered Successfully";
+                document.getElementById("login_button").style.display="block";
+            }
+            else{
+                if (username.length < 8) {
+                document.getElementById("msgusername").innerHTML="atleast 8 characters";
+                }
+
+                if(patt_special==!true){
+                    document.getElementById("msgemail").innerHTML="Invalid email";
+                }
+            
+                if (password.length < 8) {
+                document.getElementById("msgpassword_l").innerHTML="atleast 8 characters";
+                }
+
+                if (patt_uppercase !== true) {
+                document.getElementById("msgpassword_uc").innerHTML="atleast 1 uppercase ";
+                }
+                
+                if (patt_lowercase !==true) {
+                document.getElementById("msgpassword_lc").innerHTML="atleast 1 lowercase ";
+                }
+                
+                if (patt_number !==true) {
+                document.getElementById("msgpassword_n").innerHTML="atlest 1 number ";
+                }
+            }
+        }
+    </script>
+</html>
